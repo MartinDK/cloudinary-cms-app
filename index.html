@@ -10,30 +10,23 @@
         <img src="" alt="" width="400" id="my-image" />
         <p id="my-text"></p>
         <script>
-            getImage().catch((err) => {
-                console.log('Error getting image !');
-                console.log(err);
-            });
-            getText().catch((err) => {
-                console.log('Error getting text!');
-                console.log(err);
-            });
+            csvHandler();
 
-            async function getImage() {
-                console.log('Getting image!');
-                const response = await fetch('image.jpg');
-                const blob = await response.blob();
-                console.log(blob);
-                document.getElementById('my-image').src = URL.createObjectURL(blob);
+            async function csvHandler() {
+                const response = await fetch('ZonAnn.Ts+dSST.csv');
+                const data = await response.text();
+                console.log(data);
+                // create data array without column titles i.e slice array from position 1
+                const rows = data.split('\n').slice(1);
+                rows.forEach((row) => {
+                    const yearData = row.split(',');
+                    const year = yearData[0];
+                    const temp = yearData[1];
+                    console.log(year, temp);
+                });
             }
-            async function getText() {
-                console.log('Getting text!');
-                const response = await fetch('test.txt');
-                const blob = await response.blob();
-                const text = await blob.text();
-                document.getElementById('my-text').innerText = text;
-                console.log(text);
-            }
+            // site: https://data.giss.nasa.gov/gistemp/
+            // data: https://data.giss.nasa.gov/gistemp/tabledata_v4/T_AIRS/ZonAnn.Ts+dSST.csv
         </script>
     </body>
 </html>
