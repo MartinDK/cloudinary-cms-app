@@ -30,17 +30,23 @@
         >
         <div id="mapid"></div>
         <script>
+            async function postData(options, location) {
+                console.log('l', location);
+                const response = await fetch('/api', options);
+                const data = await response.text();
+            }
             async function getLocation(myCallback) {
                 if ('geolocation' in navigator) {
                     console.log('geolocation available');
+
+                    let options = {};
                     // Using the browsers navigator API
                     const coOrds = await navigator.geolocation.getCurrentPosition((position) => {
                         console.log('getting locations...');
-                        latitude = position.coords.latitude;
-                        longitude = position.coords.longitude;
-                        myCallback(latitude, longitude);
+                        location.latitude = position.coords.latitude;
+                        location.longitude = position.coords.longitude;
+                        myCallback(location.latitude, location.longitude);
                     });
-                    return await coOrds;
                 } else {
                     console.log('geolocation not available');
                 }
@@ -58,21 +64,19 @@
                 const tiles = L.tileLayer(tileUrl, { attribution });
                 tiles.addTo(mymap);
                 L.marker([latitude, longitude]).addTo(mymap);
+                let location = { latitude: latitude, longitude: longitude };
+                options = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(location),
+                };
+                postData(options, { latitude: latitude, longitude: longitude });
             }
 
             // Using a mapLocation as a callback function
-            const x = getLocation(mapLocation);
-
-            const options = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ latitude: 'latitude', longitude: 'longitude' }),
-            };
-            fetch('/api', options).then((response) => {
-                console.log(response.body);
-            });
+            getLocation(mapLocation);
         </script>
     </body>
 </html>
