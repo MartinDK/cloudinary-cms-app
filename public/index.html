@@ -4,9 +4,60 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+            integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+            crossorigin=""
+        />
+        <!-- Make sure you put this AFTER Leaflet's CSS -->
+        <script
+            src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+            crossorigin=""
+        ></script>
         <title>Server Side Coding</title>
+        <style>
+            #mapid {
+                height: 180px;
+            }
+        </style>
     </head>
     <body>
         <h1>Hello World</h1>
+        <a href="https://www.youtube.com/watch?v=3ls013DBcww&t=0s"
+            >2.2 Geolocation Web API - Working with Data and APIs in JavaScript</a
+        >
+        <div id="mapid"></div>
+        <script>
+            async function getLocation(myCallback) {
+                if ('geolocation' in navigator) {
+                    console.log('geolocation available');
+                    const coOrds = await navigator.geolocation.getCurrentPosition((position) => {
+                        console.log('getting locatins...');
+                        latitude = position.coords.latitude;
+                        longitude = position.coords.longitude;
+                        myCallback(latitude, longitude);
+                    });
+                } else {
+                    console.log('geolocation not available');
+                }
+            }
+            function mapLocation(latitude, longitude) {
+                // Create map using leaflet.js and OpenStreetMaps
+                const api_url = 'https://api.wheretheiss.at/v1/satellites/25544';
+                const attribution =
+                    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>';
+
+                console.log(latitude, longitude);
+
+                const mymap = L.map('mapid').setView([latitude, longitude], 16);
+                const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+                const tiles = L.tileLayer(tileUrl, { attribution });
+                tiles.addTo(mymap);
+                L.marker([latitude, longitude]).addTo(mymap);
+            }
+            getLocation(mapLocation);
+        </script>
     </body>
 </html>
