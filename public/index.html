@@ -33,12 +33,14 @@
             async function getLocation(myCallback) {
                 if ('geolocation' in navigator) {
                     console.log('geolocation available');
+                    // Using the browsers navigator API
                     const coOrds = await navigator.geolocation.getCurrentPosition((position) => {
-                        console.log('getting locatins...');
+                        console.log('getting locations...');
                         latitude = position.coords.latitude;
                         longitude = position.coords.longitude;
                         myCallback(latitude, longitude);
                     });
+                    return await coOrds;
                 } else {
                     console.log('geolocation not available');
                 }
@@ -57,7 +59,20 @@
                 tiles.addTo(mymap);
                 L.marker([latitude, longitude]).addTo(mymap);
             }
-            getLocation(mapLocation);
+
+            // Using a mapLocation as a callback function
+            const x = getLocation(mapLocation);
+
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ latitude: 'latitude', longitude: 'longitude' }),
+            };
+            fetch('/api', options).then((response) => {
+                console.log(response.body);
+            });
         </script>
     </body>
 </html>
