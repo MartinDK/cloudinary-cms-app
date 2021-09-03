@@ -1,0 +1,25 @@
+{
+  "name": "cloudinary-cms-app",
+  "version": "1.0.0",
+  "description": "Learning the technology required to create a cloudinary cms.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MartinDK/cloudinary-cms-app.git"
+  },
+  "keywords": [
+    "tutorial"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MartinDK/cloudinary-cms-app/issues"
+  },
+  "homepage": "https://github.com/MartinDK/cloudinary-cms-app#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
