@@ -8,9 +8,8 @@ async function getLocation(myCallback) {
     if ('geolocation' in navigator) {
         console.log('geolocation available');
 
-        let options = {};
         // Using the browsers navigator API
-        const coOrds = await navigator.geolocation.getCurrentPosition((position) => {
+        navigator.geolocation.getCurrentPosition((position) => {
             console.log('getting locations...');
             location.latitude = position.coords.latitude;
             location.longitude = position.coords.longitude;
