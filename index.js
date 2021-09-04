@@ -14,5 +14,6 @@ database.loadDatabase();
 // Post API
 app.post('/api', (request, response) => {
     console.log(request.body);
-    response.json({ status: 'successful!!!!!' });
+    database.insert(request.body);
+    response.json({ status: 'successful post!!!!!' });
 });
