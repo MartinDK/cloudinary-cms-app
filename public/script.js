@@ -19,9 +19,8 @@ async function getLocation(myCallback) {
         console.log('geolocation not available');
     }
 }
-function mapLocation(latitude, longitude) {
+async function useLocation(latitude, longitude) {
     // Create map using leaflet.js and OpenStreetMaps
-    const api_url = 'https://api.wheretheiss.at/v1/satellites/25544';
     const attribution =
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>';
 
@@ -41,7 +40,8 @@ function mapLocation(latitude, longitude) {
         body: JSON.stringify(location),
     };
     postData(options, { latitude: latitude, longitude: longitude });
+    return 'latitude';
 }
 
 // Using a mapLocation as a callback function
-getLocation(mapLocation);
+getLocation(useLocation);
