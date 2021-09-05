@@ -1,5 +1,5 @@
 async function postData(location) {
-    messageEl.innerText = `Adding position to nedDB...`;
+    messageEl.innerText = `Adding position to database.db using neDb ...`;
     messageEl.classList.add('orange');
     options = {
         method: 'POST',
@@ -55,7 +55,7 @@ getPos()
         // Post location to 'nedb' database on server (Node.js server via index.js)
         postData({ latitude: latitude, longitude: longitude });
 
-        messageEl.innerText = `Your position ${latitude}°, ${longitude}° is in neDB`;
+        messageEl.innerText = `Your position ${latitude}°, ${longitude}° has been added to database.db`;
         messageEl.classList.add('green');
 
         console.log('Resolved getPos', latitude, longitude);

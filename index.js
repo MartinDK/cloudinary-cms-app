@@ -13,6 +13,8 @@ database.loadDatabase();
 
 // Post API
 app.post('/api', (request, response) => {
+    const data = request.body;
+    data.timestamp = Date.now();
     console.log(request.body);
     database.insert(request.body);
     response.json({ status: 'successful post!!!!!' });
