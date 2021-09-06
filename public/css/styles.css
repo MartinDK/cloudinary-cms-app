@@ -13,3 +13,11 @@ body {
 .green {
     color: green;
 }
+#image-captures {
+    display: flex;
+    width: 100%;
+    background: wheat;
+}
+#image-captures img {
+    height: 100px;
+}

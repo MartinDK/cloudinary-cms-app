@@ -5,6 +5,7 @@ function setup() {
     noCanvas();
     // capture video
     const video = createCapture(VIDEO);
+    video.parent('video');
     // load video image onto canvas
     video.size(320, 240);
     const button = document.getElementById('submit');
@@ -13,7 +14,7 @@ function setup() {
         imageBase64 = video.canvas.toDataURL();
         // convert video image to base64
         const imageEL = document.createElement('img');
-        const bodyEl = document.getElementById('test');
+        const bodyEl = document.getElementById('image-captures');
         clicked();
         imageEL.src = imageBase64;
         bodyEl.appendChild(imageEL);
