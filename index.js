@@ -19,3 +19,14 @@ app.post('/api', (request, response) => {
     database.insert(request.body);
     response.json({ status: 'successful post!!!!!' });
 });
+// Get API
+app.get('/api', (request, response) => {
+    database.find({}, (err, data) => {
+        if (err) {
+            console.error(err);
+            response.end();
+            return;
+        }
+        response.json(data);
+    });
+});

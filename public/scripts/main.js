@@ -11,11 +11,9 @@ async function postData(location) {
     console.log('Post to DB', location);
     const response = await fetch('/api', options);
     const data = await response.text();
-    console.log('response.data:', data);
 }
 // Create map using leaflet.js and OpenStreetMaps
 async function mapLocation(latitude, longitude) {
-    console.log('Mapping position...', latitude, longitude);
     const attribution =
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>';
 
@@ -34,7 +32,6 @@ function getPos() {
     // return a position with a promise
     return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition((position) => {
-            console.log('resolving', position);
             resolve(position);
             reject('error!!!');
         });
@@ -57,8 +54,6 @@ getPos()
 
         messageEl.innerText = `Your position ${latitude}°, ${longitude}° has been added to database.db`;
         messageEl.classList.add('green');
-
-        console.log('Resolved getPos', latitude, longitude);
     })
     .catch((err) => {
         console.log(err);
