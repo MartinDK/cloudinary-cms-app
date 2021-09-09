@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/MartinDK/cloudinary-cms-app#readme",
   "dependencies": {
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "nedb": "^1.8.0"
   }

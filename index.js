@@ -1,6 +1,7 @@
 const { response } = require('express');
 const Datastore = require('nedb');
 const express = require('express');
+require('dotenv').config();
 
 // Create server and listen on port 3000
 const app = express();
